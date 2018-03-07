@@ -41,17 +41,11 @@ export default class LearnRN extends Component {
   }
 
   render() {
-
-    let aValue;
-    console.log('Render has been executed');
-    console.log('Screen height is :' + height);
-    console.log('aVaule is:' + aValue);
-    console.log('The type of aValue is:' + typeof(aValue));
-
     return (
       <View style={styles.container}>
-      <TextInput style={styles.textInputStype} placeholder={'请输入手机号'} onChangeText={(newText) => this.updateNum(newText)}/>
-      <Text style={styles.bigTextPrompt}>
+      <TextInput style={styles.textInputStype} placeholder={'请输入手机号'} 
+      onChangeText={(newText) => this.updateNum(newText)}/>
+      <Text style={styles.textPrompStyle}>
         您输入的手机号：{this.state.updateNum}
       </Text>
       <TextInput style={styles.textInputStype} placeholder={'请输入密码'} secureTextEntry={true}
