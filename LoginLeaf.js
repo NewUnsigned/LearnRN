@@ -13,7 +13,7 @@ const {height, width} = Dimensions.get('window');
 const pixelRatioo = PixelRatio.get();
 let widthOfMargin = Dimensions.get('window').width * 0.05;
 
-export default class LearnRN extends Component {
+export default class LoginLeaf extends Component {
 
   constructor(props) {
     super(props);
@@ -86,5 +86,3 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 });
-
-AppRegistry.registerComponent('LearnRN', () => LearnRN);
