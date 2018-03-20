@@ -4,7 +4,7 @@
  * @flow
  */
 
- import React, { Component } from 'react';
+import React, { Component } from 'react';
 import {
   AppRegistry, StyleSheet, Text, View, Dimensions, PixelRatio, TextInput
 } from 'react-native';
@@ -25,8 +25,6 @@ export default class LoginLeaf extends Component {
   };
 
   updateNum(newText) {
-    console.log('this in updateNum');
-    console.log(this);
     this.setState( (state) => {
       return {
         inputedNum: newText,
@@ -43,8 +41,6 @@ export default class LoginLeaf extends Component {
   }
 
   render() {
-    console.log('this in render');
-    console.log(this);
     return (
       <View style={styles.container}>
       <TextInput style={styles.textInputStype} placeholder={'请输入手机号'}
@@ -56,12 +52,21 @@ export default class LoginLeaf extends Component {
       onChangeText={this.updatePW}
       />
 
-      <Text style={styles.bigTextPrompt}>
-        确   定
-      </Text>
+      <Text style={styles.bigTextPrompt} onPress={() => this.userPressConfirm()}> 确   定 </Text>
+      <Text style={styles.bigTextPrompt} onPress={() => this.userPressAddressBook()}> 通讯录 </Text>
       </View>
     );
   }
+
+  userPressConfirm() {
+    console.log(this.state.inputedPW);
+    this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
+  }
+
+  userPressAddressBook() {
+    console.log('clicked contact button');
+  }
+
 }
 
 const styles = StyleSheet.create({

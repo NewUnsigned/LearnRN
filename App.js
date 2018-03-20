@@ -4,87 +4,64 @@
  * @flow
  */
 
- import React, { Component } from 'react';
+import React, { Component } from 'react';
 import {
-  AppRegistry, StyleSheet, Text, View, Dimensions, PixelRatio, TextInput
+  AppRegistry, StyleSheet, Text, View, Dimensions, PixelRatio, TextInput, Platform,BackHandler
 } from 'react-native';
 
-const {height, width} = Dimensions.get('window');
-const pixelRatioo = PixelRatio.get();
-let widthOfMargin = Dimensions.get('window').width * 0.05;
+import LoginLeaf from './LoginLeaf';
+import WaitingLeaf from './WaitingLeaf';
 
-export default class LearnRN extends Component {
-
+export default class NaviModule extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputedNum: '',
-      inputedPW: ''
-    }
-    this.updatePW = this.updatePW.bind(this);
-  };
+      currentScene: 'Login',
+      phoneNumber: '',
+      userPW:''
+    };
 
-  updateNum(newText) {
-    console.log('this in updateNum');
-    console.log(this);
-    this.setState( (state) => {
-      return {
-        inputedNum: newText,
-      };
-    });
+    this.handleBackSignal = this.handleBackSignal.bind(this);
+    this.onLoginPressed = this.onLoginPressed.bind(this);
   }
 
-  updatePW(newText) {
-    this.setState(() => {
-      return {
-        inputedPW: newText,
-      };
+  onLoginPressed( aNumber, aPW ) {
+    console.log(aNumber + aPW);
+    this.setState({
+      currentScene: 'Waiting',
+      phoneNumber: aNumber,
+      userPW : aPW
     });
   }
 
   render() {
-    console.log('this in render');
-    console.log(this);
-    return (
-      <View style={styles.container}>
-      <TextInput style={styles.textInputStype} placeholder={'请输入手机号'}
-      onChangeText={(newText) => this.updateNum(newText)}/>
-      <Text style={styles.textPrompStyle}>
-        您输入的手机号：{this.state.inputedNum}
-      </Text>
-      <TextInput style={styles.textInputStype} placeholder={'请输入密码'} secureTextEntry={true}
-      onChangeText={this.updatePW}
-      />
+    if(this.state.currentScene === 'Login') {
+      return <LoginLeaf onLoginPressed={this.onLoginPressed} />;
+    } else return (
+      <WaitingLeaf phoneNumber={this.state.phoneNumber} onGobackPressed={this.handleBackSignal}
+      userPW={this.state.userPW}/>
+    )
+  }
 
-      <Text style={styles.bigTextPrompt}>
-        确   定
-      </Text>
-      </View>
-    );
+  handleBackSignal() {
+    console.log('handleBackSignal');
+    if (this.state.currentScene === 'Waiting') {
+      this.setState({currentScene : 'Login'});
+      return true;
+    }
+  }
+
+  componentDidMount() {
+    if (Platform.OS === 'android') {
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackSignal);
+    }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackSignal);
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  textInputStype: {
-    margin: widthOfMargin,
-    backgroundColor: 'gray',
-    fontSize: 20,
-  },
-  textPrompStyle: {
-    margin: widthOfMargin,
-    fontSize: 20,
-  },
-  bigTextPrompt: {
-    margin: widthOfMargin,
-    color: 'white',
-    backgroundColor: 'gray',
-    textAlign: 'center',
-    fontSize: 30,
-  },
-});
-
-AppRegistry.registerComponent('LearnRN', () => LearnRN);
+AppRegistry.registerComponent('LearnRN', () => NaviModule);
