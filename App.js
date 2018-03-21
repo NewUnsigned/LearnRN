@@ -4,64 +4,63 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry, StyleSheet, Text, View, Dimensions, PixelRatio, TextInput, Platform,BackHandler
-} from 'react-native';
+import React, { Component } from "react";
+import { AppRegistry, StyleSheet, Text, View, Dimensions, PixelRatio, TextInput, Platform, BackHandler } from "react-native";
 
-import LoginLeaf from './LoginLeaf';
-import WaitingLeaf from './WaitingLeaf';
+import LoginLeaf from "./LoginLeaf";
+import WaitingLeaf from "./WaitingLeaf";
 
 export default class NaviModule extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentScene: 'Login',
-      phoneNumber: '',
-      userPW:''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            currentScene: "Login",
+            phoneNumber: "",
+            userPW: "",
+        };
 
-    this.handleBackSignal = this.handleBackSignal.bind(this);
-    this.onLoginPressed = this.onLoginPressed.bind(this);
-  }
-
-  onLoginPressed( aNumber, aPW ) {
-    console.log(aNumber + aPW);
-    this.setState({
-      currentScene: 'Waiting',
-      phoneNumber: aNumber,
-      userPW : aPW
-    });
-  }
-
-  render() {
-    if(this.state.currentScene === 'Login') {
-      return <LoginLeaf onLoginPressed={this.onLoginPressed} />;
-    } else return (
-      <WaitingLeaf phoneNumber={this.state.phoneNumber} onGobackPressed={this.handleBackSignal}
-      userPW={this.state.userPW}/>
-    )
-  }
-
-  handleBackSignal() {
-    console.log('handleBackSignal');
-    if (this.state.currentScene === 'Waiting') {
-      this.setState({currentScene : 'Login'});
-      return true;
+        this.handleBackSignal = this.handleBackSignal.bind(this);
+        this.onLoginPressed = this.onLoginPressed.bind(this);
     }
-  }
 
-  componentDidMount() {
-    if (Platform.OS === 'android') {
-      BackHandler.addEventListener('hardwareBackPress', this.handleBackSignal);
+    onLoginPressed(aNumber, aPW) {
+        this.setState ({
+            currentScene: "Waiting",
+            phoneNumber: aNumber,
+            userPW: aPW,
+        });
     }
-  }
 
-  componentWillUnmount() {
-    if (Platform.OS === 'android') {
-      BackHandler.removeEventListener('hardwareBackPress', this.handleBackSignal);
+    render() {
+        if (this.state.currentScene === "Login") {
+            return <LoginLeaf onLoginPressed={this.onLoginPressed} />;
+        } return (
+            <WaitingLeaf
+                phoneNumber={this.state.phoneNumber}
+                onGobackPressed={this.handleBackSignal}
+                userPW={this.state.userPW}
+            />
+        );
     }
-  }
+
+    handleBackSignal() {
+        if (this.state.currentScene === "Waiting") {
+            this.setState({ currentScene: "Login" });
+            return true;
+        }
+    }
+
+    componentDidMount() {
+        if (Platform.OS === "android") {
+            BackHandler.addEventListener("hardwareBackPress", this.handleBackSignal);
+        }
+    }
+
+    componentWillUnmount() {
+        if (Platform.OS === "android") {
+            BackHandler.removeEventListener("hardwareBackPress", this.handleBackSignal);
+        }
+    }
 }
 
-AppRegistry.registerComponent('LearnRN', () => NaviModule);
+AppRegistry.registerComponent("LearnRN", () => NaviModule);

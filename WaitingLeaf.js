@@ -4,10 +4,12 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import {
   StyleSheet, Text, View
-} from 'react-native';
+} from "react-native";
 
 export default class WaitingLeaf extends Component {
 
@@ -39,12 +41,17 @@ export default class WaitingLeaf extends Component {
   }
 }
 
+WaitingLeaf.propTypes = {
+  phoneNumber: PropTypes.string,
+  userPW: PropTypes.string
+};
+
 let styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent : 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5F5F5',
+    justifyContent : "center",
+    alignItems: "center",
+    backgroundColor: "#F5F5F5",
   },
 
   textPromptStyle: {
@@ -53,9 +60,9 @@ let styles = StyleSheet.create({
 
   bigTextPrompt: {
     width: 300,
-    color: 'white',
-    backgroundColor: 'gray',
-    textAlign: 'center',
+    color: "white",
+    backgroundColor: "gray",
+    textAlign: "center",
     fontSize: 60,
   }
 });
