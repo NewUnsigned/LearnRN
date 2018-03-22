@@ -37,6 +37,7 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		754A6A7B20623D6300EA2180 /* ExampleInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 754A6A7A20623D6300EA2180 /* ExampleInterface.m */; };
 		754A6AA6206249BC00EA2180 /* CallAdressbookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 754A6AA5206249BC00EA2180 /* CallAdressbookViewController.m */; };
+		754A6AA820639A5A00EA2180 /* 80.png in Resources */ = {isa = PBXBuildFile; fileRef = 754A6AA720639A5A00EA2180 /* 80.png */; };
 		7552A178205A201600F2EE39 /* HLJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7552A177205A201600F2EE39 /* HLJViewController.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -346,6 +347,7 @@
 		754A6A7A20623D6300EA2180 /* ExampleInterface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleInterface.m; sourceTree = "<group>"; };
 		754A6AA4206249BB00EA2180 /* CallAdressbookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallAdressbookViewController.h; sourceTree = "<group>"; };
 		754A6AA5206249BC00EA2180 /* CallAdressbookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallAdressbookViewController.m; sourceTree = "<group>"; };
+		754A6AA720639A5A00EA2180 /* 80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80.png; sourceTree = "<group>"; };
 		7552A176205A201600F2EE39 /* HLJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLJViewController.h; sourceTree = "<group>"; };
 		7552A177205A201600F2EE39 /* HLJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLJViewController.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				754A6A7A20623D6300EA2180 /* ExampleInterface.m */,
 				754A6AA4206249BB00EA2180 /* CallAdressbookViewController.h */,
 				754A6AA5206249BC00EA2180 /* CallAdressbookViewController.m */,
+				754A6AA720639A5A00EA2180 /* 80.png */,
 			);
 			name = LearnRN;
 			sourceTree = "<group>";
@@ -1061,6 +1064,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				754A6AA820639A5A00EA2180 /* 80.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

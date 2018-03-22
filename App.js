@@ -9,6 +9,9 @@ import { AppRegistry, StyleSheet, Text, View, Dimensions, PixelRatio, TextInput,
 
 import LoginLeaf from "./LoginLeaf";
 import WaitingLeaf from "./WaitingLeaf";
+import Flexbox from "./Flexbox";
+import TextUI from "./TextUI";
+import KeyboardView from "./KeyboardView";
 
 export default class NaviModule extends Component {
     constructor(props) {
@@ -33,7 +36,8 @@ export default class NaviModule extends Component {
 
     render() {
         if (this.state.currentScene === "Login") {
-            return <LoginLeaf onLoginPressed={this.onLoginPressed} />;
+            return <KeyboardView/>
+            // return <LoginLeaf onLoginPressed={this.onLoginPressed} />;
         } return (
             <WaitingLeaf
                 phoneNumber={this.state.phoneNumber}
