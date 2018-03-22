@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import {
-  StyleSheet, Text, View, Image, TextInput, Dimensions, Keyboard
+  StyleSheet, Text, View, Image, TextInput, Dimensions, Keyboard, StatusBar
 } from 'react-native';
 
 let nativeImageSource = require('nativeImageSource');
@@ -28,6 +28,23 @@ export default class KeyboardView extends Component {
 
   keyboardDidHideHandler(event) {
     this.setState({KeyboardShown: false});
+  }
+
+  componentDidMount() {
+    var aref = this.tempfunc.bind(this);
+    window.setTimeout(aref, 1);
+  }
+
+  tempfunc() {
+    this.refs.bottomInput.measure( this.getTextInputPosition );
+  }
+
+  getTextInputPosition(fx, fy, width, height, px, py) {
+    console.log('getTextInputPosition');
+    console.log('Component width is' + width);
+    console.log('Component height is' + height);
+    console.log('X width is' + px);
+    console.log('Y width is' + py);
   }
 
   componentWillMount() {
@@ -52,6 +69,13 @@ export default class KeyboardView extends Component {
   render() {
     return (
       <View style={[styles.container, this.state.KeyboardShown && styles.bumpedContainer]}>
+          <StatusBar animated={true}
+            hidden={false}
+            backgroundColor={'grey'}
+            barStyle={'default'}
+            networkActivityIndicatorVisible={true}>
+
+          </StatusBar>
           <Text style={styles.buttonStyple}
             onPress={this.onDissmissKeyboard}> 
             Dismiss Keyboard
