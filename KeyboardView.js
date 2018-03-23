@@ -71,7 +71,7 @@ export default class KeyboardView extends Component {
       <View style={[styles.container, this.state.KeyboardShown && styles.bumpedContainer]}>
           <StatusBar animated={true}
             hidden={false}
-            backgroundColor={'grey'}
+            backgroundColor={'grey'}  
             barStyle={'default'}
             networkActivityIndicatorVisible={true}>
 
