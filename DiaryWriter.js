@@ -6,17 +6,24 @@
 
 import React, { Component } from 'react';
 import {
-  Text, View, TextInput, Image, StatusBar, TouchableOpacity
+  Text, View, TextInput, Image, StatusBar, TouchableOpacity, Alert
 } from 'react-native';
 
 import MCV from "./MCV";
 
 let angryMood = require('./image/80.png');
 
-export default class DiaryReader extends Component {
+export default class DiaryWriter extends Component {
 
-  updateSearchKeyword(newWord) {
-
+  returnPressed() {
+    Alert.alert(
+      '请确认',
+      '你确定要退回日记列表吗？',
+      [
+        {text: '确定'},
+        {text: '取消'}
+      ]
+    );
   }
 
   render() {
@@ -24,39 +31,28 @@ export default class DiaryReader extends Component {
       <View style={MCV.container}>
         <StatusBar hidden={false} />
         <View style={MCV.firstRow}>
-           <TouchableOpacity >
-              <Text style={MCV.middleButton}>
+           <TouchableOpacity onPress={this.returnPressed}>
+              <Text style={MCV.smallButton}>
                 返回
               </Text>
            </TouchableOpacity>
-           <TouchableOpacity >
-              <Text style={MCV.middleButton}>
-                上一篇
+           <TouchableOpacity onPress={this.selectMood}>
+              <Text style={MCV.longButton}>
+                某变量单签按钮文字
               </Text>
            </TouchableOpacity>
            <TouchableOpacity >
-              <Text style={MCV.middleButton}>
-                下一篇
+              <Text style={MCV.smallButton}>
+                保存
               </Text>
            </TouchableOpacity>
         </View>
-        <View style={MCV.secondRow}>
-          <Image style={MCV.moodStyle} source={angryMood} />
-          <View style={MCV.subViewInReader}>
-            <TextInput style={MCV.textInReader} editable={false}>
-              日记标题：某变量  
-            </TextInput>
-            <TextInput style={MCV.textInReader} editable={false}>
-              时间：某变量
-            </TextInput>
-          </View>
-        </View>
-        <TextInput style={[MCV.diaryBodyStyle, {color:'black'}]}
-          multiline={true}
-          editable={false}
-          value={'某变量记录日记正文'}
-        >
-        </TextInput>
+        <TextInput style={MCV.titleInputStyle}
+          placeholder='写个日记标题吧'
+        />
+        <TextInput style={MCV.diaryBodyStyle} multiline={true}
+          placeholder='日记正文在此输入'
+          />
       </View>
     );
   }
