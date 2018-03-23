@@ -9,7 +9,7 @@ import { AppRegistry } from "react-native";
 
 import DiaryList from "./DiaryList";
 // import DiaryWriter from "./DiaryWriter";
-// import DiaryReader from "./DiaryReader";
+import DiaryReader from "./DiaryReader";
 
 export default class LearnRN extends Component {
 
@@ -32,8 +32,8 @@ export default class LearnRN extends Component {
     }
 
     render() {
-        return this.showDiaryList();
-        return this.showDiaryWriter();
+        // return this.showDiaryList();
+        // return this.showDiaryWriter();
         return this.showDiaryReader();
     }
 }
