@@ -6,6 +6,7 @@
         "future": "c",
         "memory": "c",
         "random": "c",
-        "*.ipp": "c"
+        "*.ipp": "c",
+        "ios": "c"
     }
 }
