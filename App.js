@@ -14,7 +14,16 @@ const SimpleApp = StackNavigator({
   Home: { screen: LoginLeaf },
   Wait: { screen: WaitingLeaf },
 });
-AppRegistry.registerComponent("LearnRN", () => SimpleApp);
+
+export default class LearnRN extends Component {
+    render() {
+        return (
+            <SimpleApp />
+        );
+    }
+}
+
+AppRegistry.registerComponent("LearnRN", () => LearnRN);
 
  /*
 import React, { Component } from "react";

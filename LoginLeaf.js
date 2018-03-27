@@ -26,6 +26,7 @@ export default class LoginLeaf extends Component {
       inputedPW: ''
     }
     this.updatePW = this.updatePW.bind(this);
+    this.jumpToWaiting = this.jumpToWaiting.bind(this);
   };
 
   jumpToWaiting() {
@@ -77,7 +78,7 @@ export default class LoginLeaf extends Component {
       '确定使用' + this.state.inputedNum + '号码登录吗？',
       [
         {text: '取消', onPress:(()=>[]), style:'cancel'},
-        {text: '确认登录么', onPress:this.jumpToWaiting}
+        {text: '确认', onPress:this.jumpToWaiting}
       ]
     );
 

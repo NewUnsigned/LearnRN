@@ -41,7 +41,7 @@ export default class WaitingLeaf extends Component {
   }
 
   onGobackPressed() {
-    this.props.onGobackPressed();
+    this.props.navigation.goBack();
   }
 }
 
