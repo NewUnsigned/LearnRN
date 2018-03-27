@@ -15,6 +15,10 @@ let widthOfMargin = Dimensions.get('window').width * 0.05;
 
 export default class LoginLeaf extends Component {
 
+  static navigationOptions = {
+    title: '登录'
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +27,13 @@ export default class LoginLeaf extends Component {
     }
     this.updatePW = this.updatePW.bind(this);
   };
+
+  jumpToWaiting() {
+    this.props.navigation.navigate('Wait', {
+      phoneNumber: this.state.inputedNum,
+      userPW:this.state.inputedPW,
+    });
+  }
 
   updateNum(newText) {
     this.setState( (state) => {
@@ -59,15 +70,16 @@ export default class LoginLeaf extends Component {
   }
 
   userPressConfirm() {
-    this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
+    // this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
 
-    // Alert.alert (
-    //   '弹出框标题提示语',
-    //   '弹出框正文提示语',
-    //   [
-    //     {text: '确认登录么', onPress:this.optionSelected}
-    //   ]
-    // );
+    Alert.alert (
+      '提示',
+      '确定使用' + this.state.inputedNum + '号码登录吗？',
+      [
+        {text: '取消', onPress:(()=>[]), style:'cancel'},
+        {text: '确认登录么', onPress:this.jumpToWaiting}
+      ]
+    );
 
   }
 

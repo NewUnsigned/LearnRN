@@ -13,6 +13,10 @@ import {
 
 export default class WaitingLeaf extends Component {
 
+  static navigationOptions = {
+    title: '登录中'
+  }
+
   constructor(props) {
     super(props);
   }

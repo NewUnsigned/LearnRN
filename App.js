@@ -4,6 +4,19 @@
  * @flow
  */
 
+import React, { Component } from 'react';
+import { AppRegistry } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import LoginLeaf from "./LoginLeaf";
+import WaitingLeaf from "./WaitingLeaf";
+
+const SimpleApp = StackNavigator({
+  Home: { screen: LoginLeaf },
+  Wait: { screen: WaitingLeaf },
+});
+AppRegistry.registerComponent("LearnRN", () => SimpleApp);
+
+ /*
 import React, { Component } from "react";
 import { AppRegistry } from "react-native";
 
@@ -132,5 +145,5 @@ export default class LearnRN extends Component {
         if(this.state.uiCode === 3) return this.showDiaryWriter();
     }
 }
-
-AppRegistry.registerComponent("LearnRN", () => LearnRN);
+AppRegistry.registerComponent("LearnRN", () => SimpleApp);
+*/
