@@ -15,7 +15,13 @@ let angryMood = require('./image/80.png');
 
 export default class DiaryList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.updateSearchKeyword = this.updateSearchKeyword.bind(this);
+  }
+
   updateSearchKeyword(newWord) {
+    this.props.searchKeyword(newWord);
 
   }
 
@@ -33,7 +39,7 @@ export default class DiaryList extends Component {
               />
            </View>
 
-           <TouchableOpacity >
+           <TouchableOpacity onPress={this.props.writeDiary}>
              <View style={MCV.middleButtonContainer}>
               <Text style={MCV.middleButton}>
                 写日记
