@@ -22,7 +22,7 @@ export default class DiaryWriter extends Component {
     this.diaryBody = null;
     this.moodCode = 0;
     this.state = {
-      moodText = '请选择心情'
+      moodText : '请选择心情'
     };
   }
 
@@ -46,22 +46,22 @@ export default class DiaryWriter extends Component {
     }
     switch (this.moodCode) {
       case 1:
+        tempString = '现在的心情：平静';
+        break;
+      case 2:
         tempString = '现在的心情：愤怒';
         break;
-      case 1:
-        tempString = '现在的心情：愤怒';
+      case 3:
+        tempString = '现在的心情：悲伤';
         break;
-      case 1:
-        tempString = '现在的心情：愤怒';
+      case 4:
+        tempString = '现在的心情：高兴';
         break;
-      case 1:
-        tempString = '现在的心情：愤怒';
-        break;
-      case 1:
-        tempString = '现在的心情：愤怒';
+      case 5:
+        tempString = '现在的心情：痛苦';
         break;
     }
-    this.setState( ()=>{
+    this.setState(()=>{
       return {
         moodText: tempString
       };
@@ -73,17 +73,17 @@ export default class DiaryWriter extends Component {
       <View style={MCV.container}>
         <StatusBar hidden={false} />
         <View style={MCV.firstRow}>
-           <TouchableOpacity onPress={this.returnPressed}>
+           <TouchableOpacity onPress={this.returnPressed.bind(this)}>
               <Text style={MCV.smallButton}>
                 返回
               </Text>
            </TouchableOpacity>
-           <TouchableOpacity onPress={this.selectMood}>
+           <TouchableOpacity onPress={this.selectMood.bind(this)}>
               <Text style={MCV.longButton}>
-                某变量单签按钮文字
+                {this.state.moodText}
               </Text>
            </TouchableOpacity>
-           <TouchableOpacity >
+           <TouchableOpacity onPress={()=>this.props.saveDiary(this.moodCode,this.diaryBody,this.diaryTitle)}>
               <Text style={MCV.smallButton}>
                 保存
               </Text>
@@ -91,9 +91,11 @@ export default class DiaryWriter extends Component {
         </View>
         <TextInput style={MCV.titleInputStyle}
           placeholder='写个日记标题吧'
+          onChangeText={(text)=>{this.diaryTitle=text}}
         />
         <TextInput style={MCV.diaryBodyStyle} multiline={true}
           placeholder='日记正文在此输入'
+          onChangeText={(text)=>{this.diaryBody=text}}
           />
       </View>
     );

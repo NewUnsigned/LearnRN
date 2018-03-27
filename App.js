@@ -97,6 +97,7 @@ export default class LearnRN extends Component {
                 fakeListTime={this.state.diaryTime}
                 fakeListMood={this.state.diaryMood}
                 selectListisItem={this.selectListisItem}
+                searchKeyword={this.searchKeyword}
                 writeDiary={this.writeDiary}/>
         );
     }
@@ -123,8 +124,8 @@ export default class LearnRN extends Component {
 
     render() {
         if(this.state.uiCode === 1) return this.showDiaryList();
-        if(this.state.uiCode === 1) return this.showDiaryReader();
-        if(this.state.uiCode === 1) return this.showDiaryWriter();
+        if(this.state.uiCode === 2) return this.showDiaryReader();
+        if(this.state.uiCode === 3) return this.showDiaryWriter();
     }
 }
 

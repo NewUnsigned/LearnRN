@@ -43,7 +43,7 @@ export default class DiaryReader extends Component {
               {this.props.diaryTitle}
             </TextInput>
             <TextInput style={MCV.textInReader} editable={false}>
-              {this.diaryTime}
+              {this.props.diaryTime}
             </TextInput>
           </View>
         </View>

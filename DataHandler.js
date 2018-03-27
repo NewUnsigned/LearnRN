@@ -20,6 +20,7 @@ export default class DataHandler {
   static getAllTheDiary() {
     return new Promise(
       function( resolve, reject ) {
+        // AsyncStorage.clear();
         AsyncStorage.getAllKeys().then(
           (keys)=>{
             if(keys.length === 0) {
@@ -32,11 +33,12 @@ export default class DataHandler {
               console.log('注意,resolve后的语句还会被执行，因此resolve后如果有代码，结束处理必须要使用return');
               return;
             }
+
             AsyncStorage.multiGet(keys).then(
               (results)=>{
                 let resultLength = results.length;
                 for (let counter = 0; counter < resultLength; counter++) {
-                  DataHandler.realDairyList[counter] = JSON.parse(results[counter])
+                  DataHandler.realDairyList[counter] = JSON.parse(results[counter][1])
                 }
                 DataHandler.bubleSortDiaryList();
                 if (resultLength > 0) {
@@ -206,7 +208,7 @@ export default class DataHandler {
           DataHandler.realDairyList[totalLength] = aDiary;
           DataHandler.listIndex = totalLength;
           let newMoodIcon;
-          switch (DataHandler.realDairyList[resultLength].mood) {
+          switch (newDiaryMood) {
             case 2:
               newMoodIcon = angryMood;
             break;
@@ -228,13 +230,13 @@ export default class DataHandler {
             diaryTime: timeString,
             diaryTitle: newDiaryTitle,
             diaryBody: newDiaryBody,
-            diaryMood: newDiaryMood,
+            diaryMood: newMoodIcon,
           }
           resolve(aValue);
         }
       ).catch(
         (error)=>{
-          console.log('Saving failed, error' + error.message);
+          console.log('Saving failed, error ' + error.message);
         }
       )
     });

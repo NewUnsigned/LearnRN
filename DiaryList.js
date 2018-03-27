@@ -50,16 +50,16 @@ export default class DiaryList extends Component {
         <View style={MCV.diaryAbstractList}>
           <View style={MCV.secondRow}> 
             <Image style={MCV.moodStyle} 
-              source={angryMood}
+              source={this.props.fakeListMood}
             />
             <View style={MCV.subViewInReader}>
               <TouchableOpacity onPress={this.props.selectListisItem}>
                 <Text style={MCV.textInReader}>
-                  某变量记录假日记列表标题
+                  {this.props.fakeListTitle}
                 </Text>
               </TouchableOpacity>
               <Text style={MCV.textInReader}>
-                某变量记录假日记列表时间
+                {this.props.fakeListTime}
               </Text>
             </View>
           </View>
@@ -68,3 +68,13 @@ export default class DiaryList extends Component {
     );
   }
 }
+
+// showDiaryList() {
+//   return (
+//       <DiaryList fakeListTitle={this.state.diaryTitle}
+//           fakeListTime={this.state.diaryTime}
+//           fakeListMood={this.state.diaryMood}
+//           selectListisItem={this.selectListisItem}
+//           writeDiary={this.writeDiary}/>
+//   );
+// }
