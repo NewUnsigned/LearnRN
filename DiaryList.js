@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import {
-  Text, View, TextInput, Image, StatusBar, TouchableOpacity
+  Text, View, TextInput, Image, StatusBar, TouchableOpacity, ListView, RefreshControl
 } from 'react-native';
 
 import MCV from "./MCV";
@@ -17,12 +17,73 @@ export default class DiaryList extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      diaryListDataSource: new ListView.DataSource({
+        rowHasChanged: (oldRow, newRow) => oldRow !== newRow
+      })
+    };
+
     this.updateSearchKeyword = this.updateSearchKeyword.bind(this);
+    this.renderListItem = this.renderListItem.bind(this);
+    this.onRefresh = this._onRefresh.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+  }
+
+  _onRefresh() {
+    console.log('onFresh');
+  }
+
+  onScroll() {
+    console.log('onScroll');
+  }
+
+  componentWillMount() {
+    if (this.props.diaryList === null) {
+      return;
+    }
+    this.setState({
+      diaryListDataSource: this.state.diaryListDataSource.cloneWithRows(this.props.diaryList)
+    });
+  }
+
+  componentWillReceiveProps( nextProps ) {
+    this.setState({
+      diaryListDataSource: this.state.diaryListDataSource.cloneWithRows(nextProps.diaryList)
+    });
   }
 
   updateSearchKeyword(newWord) {
     this.props.searchKeyword(newWord);
 
+  }
+
+  renderListItem(log, sectionID, rowID) {
+    return (
+      <TouchableOpacity onPress={()=>this.props.selectListisItem(rowID)}>
+          <View style={MCV.secondRow}> 
+            <Image style={MCV.moodStyle} 
+              source={log.mood}
+            />
+            <View style={MCV.subViewInReader}>
+              <Text style={MCV.textInReader}>
+                {log.title}
+              </Text>
+              <Text style={MCV.textInReader}>
+                {log.time}
+              </Text>
+            </View>
+          </View>
+      </TouchableOpacity>
+    );
+  }
+
+  renderHeader() {
+    return (
+      <View>
+        <Text style={{height: 40,backgroundColor: 'grey'}}> 我是header </Text>
+      </View>
+    )
   }
 
   render() {
@@ -47,23 +108,32 @@ export default class DiaryList extends Component {
              </View>
            </TouchableOpacity>
         </View>
-        <View style={MCV.diaryAbstractList}>
-          <View style={MCV.secondRow}> 
-            <Image style={MCV.moodStyle} 
-              source={this.props.fakeListMood}
-            />
-            <View style={MCV.subViewInReader}>
-              <TouchableOpacity onPress={this.props.selectListisItem}>
-                <Text style={MCV.textInReader}>
-                  {this.props.fakeListTitle}
-                </Text>
-              </TouchableOpacity>
-              <Text style={MCV.textInReader}>
-                {this.props.fakeListTime}
-              </Text>
-            </View>
-          </View>
-        </View>
+        {
+          (
+            (this.props.diaryList.length !== 0) ?
+            (
+              <ListView dataSource={this.state.diaryListDataSource} renderRow={this.renderListItem}
+                renderHeader={this.renderHeader}
+                onScroll={this.onScroll}
+                refreshControl={
+                  <RefreshControl refreshing={false}
+                    onRefresh={this._onRefresh}
+                    tintColor='#ff0000'
+                    colors={['#ff0000','#00ff00','#0000ff']}
+                    progressBackgroundColor='#ffff00'>
+                    
+                  </RefreshControl>
+                }>
+
+              </ListView>
+            ):
+            (
+              <View style={{flex:1, justifyContent: 'center'}}>
+                <Text style={{fontSize: 18}}> 您还没有写日记哦 </Text>
+              </View>
+            )
+          )
+        }
       </View>
     );
   }

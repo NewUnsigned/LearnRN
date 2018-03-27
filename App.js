@@ -21,11 +21,13 @@ export default class LearnRN extends Component {
             diaryTime: '读取中......' ,
             diaryTitle: '读取中......' ,
             diaryBody: '读取中......' ,
+            diaryMood: null,
+            diaryList: [],
         }
         this.bindAllMyFunction();
         DataHandler.getAllTheDiary().then(
             (result)=>{
-                this.setState(result);
+                this.setState({diaryList: result});
             }
         ).catch(
             (error)=>{
@@ -87,8 +89,9 @@ export default class LearnRN extends Component {
         console.log('search keyword is:' + keyword);
     }
 
-    selectListisItem() {
-        this.setState( {uiCode: 2} );
+    selectListisItem( aIndex ) {
+        let rValue = DataHandler.getDiaryAtIndex(aIndex);
+        this.setState( rValue );
     }
 
     showDiaryList() {
@@ -96,6 +99,7 @@ export default class LearnRN extends Component {
             <DiaryList fakeListTitle={this.state.diaryTitle}
                 fakeListTime={this.state.diaryTime}
                 fakeListMood={this.state.diaryMood}
+                diaryList={this.state.diaryList}
                 selectListisItem={this.selectListisItem}
                 searchKeyword={this.searchKeyword}
                 writeDiary={this.writeDiary}/>

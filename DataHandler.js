@@ -24,65 +24,43 @@ export default class DataHandler {
         AsyncStorage.getAllKeys().then(
           (keys)=>{
             if(keys.length === 0) {
-              let returnValue={
-                diaryTime: '没有历史日记',
-                diaryTitle: '没有历史日记',
-                diaryBody: ''
-              }
-              resolve( returnValue );
-              console.log('注意,resolve后的语句还会被执行，因此resolve后如果有代码，结束处理必须要使用return');
+              resolve( DataHandler.realDairyList );
               return;
             }
 
             AsyncStorage.multiGet(keys).then(
               (results)=>{
+                console.log('results' + results);
                 let resultLength = results.length;
                 for (let counter = 0; counter < resultLength; counter++) {
-                  DataHandler.realDairyList[counter] = JSON.parse(results[counter][1])
-                }
-                DataHandler.bubleSortDiaryList();
-                if (resultLength > 0) {
-                  resultLength--;
-                  DataHandler.listIndex = resultLength;
-                  let newMoodIcon;
-                  switch (DataHandler.realDairyList[resultLength].mood) {
+                  DataHandler.realDairyList[counter] = JSON.parse(results[counter][1]);
+                  console.log('realDairyList' + DataHandler.realDairyList[counter]);
+
+                  switch (DataHandler.realDairyList[counter].mood) {
                     case 2:
-                      newMoodIcon = angryMood;
-                    break;
+                        DataHandler.realDairyList[counter].mood = angryMood;
+                        break;
                     case 3:
-                      newMoodIcon = sadMood;
-                    break;
+                        DataHandler.realDairyList[counter].mood = sadMood;
+                        break;
                     case 4:
-                      newMoodIcon = happyMood;
-                    break;
+                       DataHandler.realDairyList[counter].mood = happyMood;
+                       break;
                     case 5:
-                      newMoodIcon = miseryMood;
-                    break;
+                       DataHandler.realDairyList[counter].mood = miseryMood;
+                       break;
                     default:
-                      newMoodIcon = peaceMood;
-                      break;
+                       DataHandler.realDairyList[counter].mood = peaceMood;
+                       break;
                   }
-                  let newTitle = DataHandler.realDairyList[resultLength].title;
-                  let newBody = DataHandler.realDairyList[resultLength].body;
-                  let ctime = new Date(DataHandler.realDairyList[resultLength].time);
-                  let timeString = '' + ctime.getFullYear() + '年' + (ctime.getMonth() + 1) +'月' + ctime.getDate() + '日 星期' + (ctime.getDay() + 1) + ' ' + ctime.getHours() + ':' + ctime.getMinutes();
-                  let rValue = {
-                    diaryMood: newMoodIcon,
-                    diaryTime: timeString,
-                    diaryTitle: newTitle,
-                    diaryBody: newBody,
-                  }
-                  resolve(rValue);
-                } else {
-                  let returnValue = {
-                    diaryTime: '没有历史日记',
-                    diaryTitle: '没有历史日记',
-                    diaryBody: ''
-                  }
-                  resolve(returnValue);
+                  let atime = new Date(DataHandler.realDairyList[counter].time);
+                  DataHandler.realDairyList[counter].time = '' + atime.getFullYear() + '年' + (atime.getMonth() + 1) +'月' + atime.getDate() + '日 星期' + (atime.getDay() + 1) + ' ' + atime.getHours() + ':' + atime.getMinutes();
                 }
+                console.log('DataHandler.realDairyList' + DataHandler.realDairyList);
+                DataHandler.bubleSortDiaryList();
+                resolve( DataHandler.realDairyList );
               }
-            ).catch(
+            ).catch (
               (error)=>{
                 console.log(error);
               }
@@ -93,11 +71,7 @@ export default class DataHandler {
             console.log('A error happens while read all the diary.');
             console.log(error);
             AsyncStorage.clear();
-            let aValue = {
-              diaryTime: '没有历史日记',
-              diaryTitle: '没有历史日记',
-              diaryBody: ''
-            }
+            resolve(DataHandler.realDairyList);
           }
         );
       }
@@ -118,77 +92,42 @@ export default class DataHandler {
   }
 
   static getPreviousDiary() {
-    if (DataHandler.listIndex === 0) {
+    if (DataHandler.listIndex < 1) {
       return null;
       DataHandler.listIndex--;
-      let resultsLength = DataHandler.listIndex;
-      let newMoodIcon;
-      switch (DataHandler.realDairyList[resultLength].mood) {
-        case 2:
-          newMoodIcon = angryMood;
-        break;
-        case 3:
-          newMoodIcon = sadMood;
-        break;
-        case 4:
-          newMoodIcon = happyMood;
-        break;
-        case 5:
-          newMoodIcon = miseryMood;
-        break;
-        default:
-          newMoodIcon = peaceMood;
-          break;
-      }
-      let newTitle = DataHandler.realDairyList[resultLength].title;
-      let newBody = DataHandler.realDairyList[resultLength].body;
-      let ctime = new Date(DataHandler.realDairyList[resultLength].time);
-      let timeString = '' + ctime.getFullYear() + '年' + (ctime.getMonth() + 1) +'月' + ctime.getDate() + '日 星期' + (ctime.getDay() + 1) + ' ' + ctime.getHours() + ':' + ctime.getMinutes();
-      let rValue = {
-        diaryMood: newMoodIcon,
-        diaryTime: timeString,
-        diaryTitle: newTitle,
-        diaryBody: newBody,
-      }
-      return rValue;
+      return {
+        uiCode: 2,
+        diaryTime: DataHandler.realDairyList[DataHandler.listIndex].time,
+        diaryTitle: DataHandler.realDairyList[DataHandler.listIndex].title,
+        diaryMood: DataHandler.realDairyList[DataHandler.listIndex].mood,
+        diaryBody: DataHandler.realDairyList[DataHandler.listIndex].body,
+      };
     }
   }
 
+  static getDiaryAtIndex(aIndex) {
+    DataHandler.listIndex = aIndex;
+    return {
+      uiCode: 2,
+      diaryTime: DataHandler.realDairyList[DataHandler.listIndex].time,
+      diaryTitle: DataHandler.realDairyList[DataHandler.listIndex].title,
+      diaryMood: DataHandler.realDairyList[DataHandler.listIndex].mood,
+      diaryBody: DataHandler.realDairyList[DataHandler.listIndex].body,
+    };
+  }
+
   static getNextDiary() {
-    if (DataHandler.listIndex === (DataHandler.realDairyList.length - 1)) {
+    if (DataHandler.listIndex >= (DataHandler.realDairyList.length - 1)) {
       return null;
+      DataHandler.listIndex++;
+      return {
+        uiCode: 2,
+        diaryTime: DataHandler.realDairyList[DataHandler.listIndex].time,
+        diaryTitle: DataHandler.realDairyList[DataHandler.listIndex].title,
+        diaryMood: DataHandler.realDairyList[DataHandler.listIndex].mood,
+        diaryBody: DataHandler.realDairyList[DataHandler.listIndex].body,
+      };
     }
-    DataHandler.listIndex++;
-    let resultsLength = DataHandler.listIndex;
-      let newMoodIcon;
-      switch (DataHandler.realDairyList[resultLength].mood) {
-        case 2:
-          newMoodIcon = angryMood;
-        break;
-        case 3:
-          newMoodIcon = sadMood;
-        break;
-        case 4:
-          newMoodIcon = happyMood;
-        break;
-        case 5:
-          newMoodIcon = miseryMood;
-        break;
-        default:
-          newMoodIcon = peaceMood;
-          break;
-      }
-      let newTitle = DataHandler.realDairyList[resultLength].title;
-      let newBody = DataHandler.realDairyList[resultLength].body;
-      let ctime = new Date(DataHandler.realDairyList[resultLength].time);
-      let timeString = '' + ctime.getFullYear() + '年' + (ctime.getMonth() + 1) +'月' + ctime.getDate() + '日 星期' + (ctime.getDay() + 1) + ' ' + ctime.getHours() + ':' + ctime.getMinutes();
-      let rValue = {
-        diaryMood: newMoodIcon,
-        diaryTime: timeString,
-        diaryTitle: newTitle,
-        diaryBody: newBody,
-      }
-      return rValue;
   }
 
   static saveDiary(newDiaryMood, newDiaryBody, newDiaryTitle) {
@@ -199,14 +138,13 @@ export default class DataHandler {
       aDiary.title = newDiaryTitle;
       aDiary.body = newDiaryBody;
       aDiary.mood = newDiaryMood;
-      aDiary.time = currentTime;
       aDiary.sectionID = '' + currentTime.getFullYear() + ' 年 ' + (currentTime.getMonth() + 1) + '月';
       aDiary.index = Date.parse(currentTime);
       AsyncStorage.setItem('' + aDiary.index, JSON.stringify(aDiary)).then(
         ()=>{
           let totalLength = DataHandler.realDairyList.length;
+          aDiary.time = timeString;
           DataHandler.realDairyList[totalLength] = aDiary;
-          DataHandler.listIndex = totalLength;
           let newMoodIcon;
           switch (newDiaryMood) {
             case 2:
@@ -225,12 +163,10 @@ export default class DataHandler {
               newMoodIcon = peaceMood;
               break;
           }
+          DataHandler.realDairyList[totalLength].mood = newMoodIcon;
           let aValue = {
             uiCode: 1,
-            diaryTime: timeString,
-            diaryTitle: newDiaryTitle,
-            diaryBody: newDiaryBody,
-            diaryMood: newMoodIcon,
+            diaryList: DataHandler.realDairyList
           }
           resolve(aValue);
         }
