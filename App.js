@@ -4,16 +4,24 @@
  * @flow
  */
 
+ /*
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 import LoginLeaf from "./LoginLeaf";
 import WaitingLeaf from "./WaitingLeaf";
+import DiaryWriter from "./DiaryWriter";
 
-const SimpleApp = StackNavigator({
-  Home: { screen: LoginLeaf },
-  Wait: { screen: WaitingLeaf },
+const MainScreenNavigator = StackNavigator({
+    Login: {screen: LoginLeaf},
+    Wait: {screen: WaitingLeaf}
 });
+
+const SimpleApp = DrawerNavigator({
+    Login: { screen: LoginLeaf },
+    Wait: {screen: WaitingLeaf},
+    List: { screen: DiaryWriter },
+  });
 
 export default class LearnRN extends Component {
     render() {
@@ -24,8 +32,51 @@ export default class LearnRN extends Component {
 }
 
 AppRegistry.registerComponent("LearnRN", () => LearnRN);
+*/
 
- /*
+import React, { Component } from 'react';
+import { AppRegistry, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import LoginLeaf from "./LoginLeaf";
+import WaitingLeaf from "./WaitingLeaf";
+import WaitingModel from "./WaitingModel";
+
+const SimpleApp = StackNavigator({
+  Home: { screen: LoginLeaf },
+  Wait: { screen: WaitingLeaf },
+});
+
+export default class LearnRN extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state={
+            showWaitngModal: false,
+            modalPrompt: '',
+        }
+        this.setWaitingModal = this.setWaitingModal.bind(this);
+    }
+
+    setWaitingModal( shwo, aPrompt) {
+        this.setState({showWaitngModal: show, modalPrompt: aPrompt});
+    }
+
+    render() {
+        return (
+            <View style={{flex: 1}}>
+              <SimpleApp screenProps={{ setWaitingModal: this.setWaitingModal}} />
+              <WaitingModel show={this.state.showWaitngModal} 
+                prompt={this.state.modalPrompt}>
+              
+              </WaitingModel>
+            </View>
+        );
+    }
+}
+
+AppRegistry.registerComponent("LearnRN", () => LearnRN);
+
+/*
 import React, { Component } from "react";
 import { AppRegistry } from "react-native";
 

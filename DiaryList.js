@@ -15,6 +15,10 @@ let angryMood = require('./image/80.png');
 
 export default class DiaryList extends Component {
 
+  static navigationOptions() {
+    title: '我的'
+  }
+
   constructor(props) {
     super(props);
 
@@ -124,7 +128,6 @@ export default class DiaryList extends Component {
                     
                   </RefreshControl>
                 }>
-
               </ListView>
             ):
             (
@@ -138,13 +141,3 @@ export default class DiaryList extends Component {
     );
   }
 }
-
-// showDiaryList() {
-//   return (
-//       <DiaryList fakeListTitle={this.state.diaryTitle}
-//           fakeListTime={this.state.diaryTime}
-//           fakeListMood={this.state.diaryMood}
-//           selectListisItem={this.selectListisItem}
-//           writeDiary={this.writeDiary}/>
-//   );
-// }

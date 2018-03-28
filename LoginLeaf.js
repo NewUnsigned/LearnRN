@@ -70,6 +70,11 @@ export default class LoginLeaf extends Component {
     );
   }
 
+  showWaitingModalBeforeJump() {
+    this.props.screenProps.setWaitingModal(true, '请等待...');
+    this.aTimer = window.setTimeout(this.jumpToWaiting, 3000);
+  }
+
   userPressConfirm() {
     // this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
 
@@ -78,7 +83,7 @@ export default class LoginLeaf extends Component {
       '确定使用' + this.state.inputedNum + '号码登录吗？',
       [
         {text: '取消', onPress:(()=>[]), style:'cancel'},
-        {text: '确认', onPress:this.jumpToWaiting}
+        {text: '确认', onPress:this.showWaitingModalBeforeJump}
       ]
     );
 
