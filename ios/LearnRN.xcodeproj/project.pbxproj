@@ -39,6 +39,9 @@
 		754A6AA6206249BC00EA2180 /* CallAdressbookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 754A6AA5206249BC00EA2180 /* CallAdressbookViewController.m */; };
 		754A6AA820639A5A00EA2180 /* 80.png in Resources */ = {isa = PBXBuildFile; fileRef = 754A6AA720639A5A00EA2180 /* 80.png */; };
 		7552A178205A201600F2EE39 /* HLJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7552A177205A201600F2EE39 /* HLJViewController.m */; };
+		75DFCE5C206CE51800706A9E /* FLAnimatedImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DFCE5B206CE4E300706A9E /* FLAnimatedImage.framework */; };
+		75DFCE5F206CE66700706A9E /* RNFLAnimatedImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DFCE5E206CE66700706A9E /* RNFLAnimatedImageManager.m */; };
+		75DFCE62206CE70800706A9E /* RNFLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 75DFCE61206CE70800706A9E /* RNFLAnimatedImage.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
@@ -296,6 +299,13 @@
 			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
 			remoteInfo = "privatedata-tvOS";
 		};
+		75DFCE5A206CE4E300706A9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75DFCE56206CE4E200706A9E /* FLAnimatedImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92C9BC0C1B199DC500D79B06;
+			remoteInfo = FLAnimatedImage;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -350,6 +360,11 @@
 		754A6AA720639A5A00EA2180 /* 80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80.png; sourceTree = "<group>"; };
 		7552A176205A201600F2EE39 /* HLJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HLJViewController.h; sourceTree = "<group>"; };
 		7552A177205A201600F2EE39 /* HLJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HLJViewController.m; sourceTree = "<group>"; };
+		75DFCE56206CE4E200706A9E /* FLAnimatedImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FLAnimatedImage.xcodeproj; path = "../../../../Downloads/FLAnimatedImage-master/FLAnimatedImage.xcodeproj"; sourceTree = "<group>"; };
+		75DFCE5D206CE66700706A9E /* RNFLAnimatedImageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFLAnimatedImageManager.h; sourceTree = "<group>"; };
+		75DFCE5E206CE66700706A9E /* RNFLAnimatedImageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFLAnimatedImageManager.m; sourceTree = "<group>"; };
+		75DFCE60206CE70800706A9E /* RNFLAnimatedImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNFLAnimatedImage.h; sourceTree = "<group>"; };
+		75DFCE61206CE70800706A9E /* RNFLAnimatedImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNFLAnimatedImage.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -368,6 +383,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75DFCE5C206CE51800706A9E /* FLAnimatedImage.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -505,6 +521,10 @@
 				754A6AA4206249BB00EA2180 /* CallAdressbookViewController.h */,
 				754A6AA5206249BC00EA2180 /* CallAdressbookViewController.m */,
 				754A6AA720639A5A00EA2180 /* 80.png */,
+				75DFCE5D206CE66700706A9E /* RNFLAnimatedImageManager.h */,
+				75DFCE5E206CE66700706A9E /* RNFLAnimatedImageManager.m */,
+				75DFCE60206CE70800706A9E /* RNFLAnimatedImage.h */,
+				75DFCE61206CE70800706A9E /* RNFLAnimatedImage.m */,
 			);
 			name = LearnRN;
 			sourceTree = "<group>";
@@ -549,6 +569,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		75DFCE57206CE4E300706A9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75DFCE5B206CE4E300706A9E /* FLAnimatedImage.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,6 +589,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				75DFCE56206CE4E200706A9E /* FLAnimatedImage.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -737,6 +766,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 75DFCE57206CE4E300706A9E /* Products */;
+					ProjectRef = 75DFCE56206CE4E200706A9E /* FLAnimatedImage.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1035,6 +1068,13 @@
 			remoteRef = 7552A1AC205A201800F2EE39 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		75DFCE5B206CE4E300706A9E /* FLAnimatedImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FLAnimatedImage.framework;
+			remoteRef = 75DFCE5A206CE4E300706A9E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1139,8 +1179,10 @@
 			files = (
 				7552A178205A201600F2EE39 /* HLJViewController.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				75DFCE62206CE70800706A9E /* RNFLAnimatedImage.m in Sources */,
 				754A6AA6206249BC00EA2180 /* CallAdressbookViewController.m in Sources */,
 				754A6A7B20623D6300EA2180 /* ExampleInterface.m in Sources */,
+				75DFCE5F206CE66700706A9E /* RNFLAnimatedImageManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1236,6 +1278,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 9AN3SEHNKB;
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/FLAnimatedImage-master/FLAnimatedImage";
 				INFOPLIST_FILE = LearnRN/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

@@ -4,7 +4,53 @@
  * @flow
  */
 
- /*
+import React, { Component } from 'react';
+import { 
+    AppRegistry, StyleSheet, View, Text 
+} from 'react-native';
+
+import FLAnimatedImage from "./FLAnimatedImage";
+
+export default class LearnRN extends Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <FLAnimatedImage style={styles.container}
+                    src='http://img2.imgtn.bdimg.com/it/u=3588772980,2454248748&fm=27&gp=0.jpg'
+                    resizeMode='contain'>
+                </FLAnimatedImage>
+                <Text style={styles.textStyle}>
+                    Hello world.
+                </Text>
+            </View>
+        );
+    }
+}
+
+var styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    container1: {
+        width: 300,
+        height: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5F5F5'
+    },
+    textStyle: {
+        position: 'absolute',
+        top: 320,
+        left: 50,
+        height: 40,
+        fontSize: 30,
+        backgroundColor: 'transparent',
+    }
+});
+
+AppRegistry.registerComponent("LearnRN", () => LearnRN);
+
+/*
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
@@ -32,7 +78,7 @@ export default class LearnRN extends Component {
 }
 
 AppRegistry.registerComponent("LearnRN", () => LearnRN);
-*/
+
 
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
@@ -52,19 +98,67 @@ export default class LearnRN extends Component {
         super(props);
         this.state={
             showWaitngModal: false,
-            modalPrompt: '',
+            modalPrompt: '加载中...',
         }
         this.setWaitingModal = this.setWaitingModal.bind(this);
+        // this.jumpToWaiting = this.jumpToWaiting.bind(this);
+        // this.aTimer = window.setTimeout(this.jumpToWaiting, 3000);
     }
 
-    setWaitingModal( shwo, aPrompt) {
+    componentWillMount() {
+        let REQUEST_URL = 'http://localhost:8090/test.json';
+        let map = {
+            method: 'POST'
+        };
+        let privateHeaders = {
+            'Private-header1' : 'value1',
+            'Private-header2' : 'value2',
+            'Content-Type' : 'text/plain',
+            'User-Agent' : 'testAgent',
+        };
+        map.headers = privateHeaders;
+        map.follow = 20;
+        map.timeout = 0;
+        map.size = 0;
+        map.body = 'This is a message body for test.';
+        fetch(REQUEST_URL, map).then(
+            (result)=>{
+                console.log( result.url );
+                console.log( result.ok );
+                console.log( result.status );
+                console.log( result.statusText );
+                console.log( result.heads );
+                result.json().then(
+                    (obj)=>{
+                        console.log('the response body after json.');
+                        console.log(obj);
+                    }
+                ).catch(
+                    (error)=>{
+                        console.log('a error occour while parse response body.');
+                        console.log( error );
+                    }
+                )
+            }
+        ).catch(
+            (error)=> {
+                console.log(error);
+            }
+        );
+    }
+
+    // jumpToWaiting() {
+    //     this.setState({showWaitngModal: false});
+    // }
+
+    setWaitingModal( show, aPrompt) {
         this.setState({showWaitngModal: show, modalPrompt: aPrompt});
     }
 
     render() {
         return (
             <View style={{flex: 1}}>
-              <SimpleApp screenProps={{ setWaitingModal: this.setWaitingModal}} />
+              <SimpleApp screenProps={{ setWaitingModal: this.setWaitingModal, themeColor: 'red'}} />
               <WaitingModel show={this.state.showWaitngModal} 
                 prompt={this.state.modalPrompt}>
               
@@ -74,9 +168,9 @@ export default class LearnRN extends Component {
     }
 }
 
+/*
 AppRegistry.registerComponent("LearnRN", () => LearnRN);
 
-/*
 import React, { Component } from "react";
 import { AppRegistry } from "react-native";
 

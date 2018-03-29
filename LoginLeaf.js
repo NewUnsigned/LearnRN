@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry, StyleSheet, Text, View, Dimensions, PixelRatio, TextInput, Alert, Promise
 } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 const {height, width} = Dimensions.get('window');
 const pixelRatioo = PixelRatio.get();
@@ -16,7 +17,8 @@ let widthOfMargin = Dimensions.get('window').width * 0.05;
 export default class LoginLeaf extends Component {
 
   static navigationOptions = {
-    title: '登录'
+    title: '登录',
+    screenProps: {}
   }
 
   constructor(props) {
@@ -27,9 +29,11 @@ export default class LoginLeaf extends Component {
     }
     this.updatePW = this.updatePW.bind(this);
     this.jumpToWaiting = this.jumpToWaiting.bind(this);
+    this.showWaitingModalBeforeJump = this.showWaitingModalBeforeJump.bind(this);
   };
 
   jumpToWaiting() {
+    this.props.screenProps.setWaitingModal(false,'');
     this.props.navigation.navigate('Wait', {
       phoneNumber: this.state.inputedNum,
       userPW:this.state.inputedPW,
@@ -71,6 +75,7 @@ export default class LoginLeaf extends Component {
   }
 
   showWaitingModalBeforeJump() {
+    console.log(this.props.screenProps);
     this.props.screenProps.setWaitingModal(true, '请等待...');
     this.aTimer = window.setTimeout(this.jumpToWaiting, 3000);
   }
@@ -82,7 +87,7 @@ export default class LoginLeaf extends Component {
       '提示',
       '确定使用' + this.state.inputedNum + '号码登录吗？',
       [
-        {text: '取消', onPress:(()=>[]), style:'cancel'},
+        {text: '取消', onPress:(()=>{}), style:'cancel'},
         {text: '确认', onPress:this.showWaitingModalBeforeJump}
       ]
     );
