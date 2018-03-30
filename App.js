@@ -5,9 +5,9 @@
  */
 
 import React, { Component } from 'react';
-import { 
-    AppRegistry, StyleSheet, View, Text 
-} from 'react-native';
+import {
+    AppRegistry, StyleSheet, View, Text
+} from 'react-native'
 
 import FLAnimatedImage from "./FLAnimatedImage";
 
@@ -36,7 +36,7 @@ var styles = StyleSheet.create({
         height: 300,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5F5F5'
+        backgroundColor: '#F5F5F5',
     },
     textStyle: {
         position: 'absolute',
@@ -159,9 +159,9 @@ export default class LearnRN extends Component {
         return (
             <View style={{flex: 1}}>
               <SimpleApp screenProps={{ setWaitingModal: this.setWaitingModal, themeColor: 'red'}} />
-              <WaitingModel show={this.state.showWaitngModal} 
+              <WaitingModel show={this.state.showWaitngModal}
                 prompt={this.state.modalPrompt}>
-              
+
               </WaitingModel>
             </View>
         );
@@ -275,7 +275,7 @@ export default class LearnRN extends Component {
 
     showDiaryWriter() {
         return (
-            <DiaryWriter 
+            <DiaryWriter
                 returnPressed={this.returnPressed}
                 saveDiary={this.saveDiaryAndReturn}/>
         );
