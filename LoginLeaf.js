@@ -30,7 +30,7 @@ export default class LoginLeaf extends Component {
     this.updatePW = this.updatePW.bind(this);
     this.jumpToWaiting = this.jumpToWaiting.bind(this);
     this.showWaitingModalBeforeJump = this.showWaitingModalBeforeJump.bind(this);
-  };
+  }
 
   jumpToWaiting() {
     this.props.screenProps.setWaitingModal(false,'');
@@ -82,7 +82,6 @@ export default class LoginLeaf extends Component {
 
   userPressConfirm() {
     // this.props.onLoginPressed(this.state.inputedNum, this.state.inputedPW);
-
     Alert.alert (
       '提示',
       '确定使用' + this.state.inputedNum + '号码登录吗？',

@@ -59,7 +59,6 @@ export default class DiaryList extends Component {
 
   updateSearchKeyword(newWord) {
     this.props.searchKeyword(newWord);
-
   }
 
   renderListItem(log, sectionID, rowID) {

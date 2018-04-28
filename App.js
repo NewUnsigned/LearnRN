@@ -4,10 +4,11 @@
  * @flow
  */
 
+/*
 import React, { Component } from 'react';
 import {
     AppRegistry, StyleSheet, View, Text
-} from 'react-native'
+} from 'react-native';
 
 import FLAnimatedImage from "./FLAnimatedImage";
 
@@ -49,8 +50,8 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent("LearnRN", () => LearnRN);
+*/
 
-/*
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
@@ -79,7 +80,7 @@ export default class LearnRN extends Component {
 
 AppRegistry.registerComponent("LearnRN", () => LearnRN);
 
-
+/*
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
